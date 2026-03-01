@@ -83,7 +83,7 @@ face/
 
 ## Philosophy
 
-Free as in freedom, not free beer. Forever.
+Free as in freedom, not free pizza. Forever.
 
 ---
 
