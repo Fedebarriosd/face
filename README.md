@@ -42,14 +42,14 @@ face -s flip
 
 #### Available faces (example)
 
-- lenny
-- shrug
-- tableflip
-- unflip
-- disapprove
-- happy
-- cry
-- angry
+- lenny ( ͡° ͜ʖ ͡°)
+- shrug ¯\_(ツ)_/¯
+- tableflip (╯°□°）╯︵ ┻━┻
+- unflip ┬─┬ ノ( ゜-゜ノ)
+- disapprove ಠ_ಠ
+- happy (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+- cry (ಥ﹏ಥ)
+- angry (ง’̀-’́)ง
 
 ---
 
