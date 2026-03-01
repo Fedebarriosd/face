@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 Fede <fedebarriosd@gmail.com>
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  cat <<'USAGE'
+Uso:
+  face <nombre>    Copy an emoji to clipboard
+  face -l          List emojis
+  face -s <query>  Searches by name (substring)
+
+Examples:
+  face lenny
+  face shrug
+  face tableflip
+  face -l
+  face -s flip
+USAGE
+}
+
+declare -A FACES=(
+  [lenny]='( ͡° ͜ʖ ͡°)'
+  [shrug]='¯\_(ツ)_/¯'
+  [tableflip]='(╯°□°）╯︵ ┻━┻'
+  [unflip]='┬─┬ ノ( ゜-゜ノ)'
+  [disapprove]='ಠ_ಠ'
+  [happy]='(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧'
+  [cry]='(ಥ﹏ಥ)'
+  [angry]='(ง’̀-’́)ง'
+)
+
+list_faces() {
+  for k in "${!FACES[@]}"; do
+    printf "%-12s %s\n" "$k" "${FACES[$k]}"
+  done | sort
+}
+
+search_faces() {
+  local q="$1"
+  for k in "${!FACES[@]}"; do
+    if [[ "$k" == *"$q"* ]]; then
+      printf "%-12s %s\n" "$k" "${FACES[$k]}"
+    fi
+  done | sort
+}
+
+if [[ $# -eq 0 ]]; then
+  usage
+  exit 2
+fi
+
+case "${1:-}" in
+  -h|--help) usage; exit 0 ;;
+  -l|--list) list_faces; exit 0 ;;
+  -s|--search)
+    [[ $# -ge 2 ]] || { echo "face: missing query for -s" >&2; exit 2; }
+    search_faces "$2"
+    exit 0
+    ;;
+esac
+
+name="$1"
+if [[ -z "${FACES[$name]+x}" ]]; then
+  echo "face: I don't know '$name'." >&2
+  echo "Try: face -l" >&2
+  exit 1
+fi
+
+cb "${FACES[$name]}"
+echo "Copyed: $name to clipboard"

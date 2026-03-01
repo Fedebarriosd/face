@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 Fede <fedebarriosd@gmail.com>
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Copy to clipboard, receiving text through args or stdin.
+copy() {
+  local text="$1"
+
+  if command -v wl-copy >/dev/null 2>&1; then
+    printf "%s" "$text" | wl-copy --type text/plain --trim-newline
+    return 0
+  fi
+
+  if command -v xclip >/dev/null 2>&1; then
+    printf "%s" "$text" | xclip -selection clipboard
+    return 0
+  fi
+
+  if command -v xsel >/dev/null 2>&1; then
+    printf "%s" "$text" | xsel --clipboard --input
+    return 0
+  fi
+
+  if command -v pbcopy >/dev/null 2>&1; then
+    printf "%s" "$text" | pbcopy
+    return 0
+  fi
+
+  echo "cb: I didn't find a clipboard (wl-copy/xclip/xsel/pbcopy)" >&2
+  return 1
+}
+
+if [[ $# -gt 0 ]]; then
+  copy "$*"
+else
+  # leer stdin completo
+  if [ -t 0 ]; then
+    echo "cb: please send text as args or stdin" >&2
+    exit 2
+  fi
+  input="$(cat)"
+  copy "$input"
+fi
