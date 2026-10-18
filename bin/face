@@ -30,6 +30,7 @@ declare -A FACES=(
   [happy]='(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧'
   [cry]='(ಥ﹏ಥ)'
   [angry]='(ง’̀-’́)ง'
+  [sad]='(ㅠ﹏ㅠ)'
 )
 
 list_faces() {

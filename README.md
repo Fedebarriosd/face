@@ -63,6 +63,8 @@ cd face
 
 Make sure `~/.local/bin` is in your PATH.
 
+To install somewhere else, set `BIN_DIR`, e.g. `BIN_DIR=~/.local/scripts ./install.sh`.
+
 ---
 
 ## Project Structure
