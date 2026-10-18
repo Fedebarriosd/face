@@ -1,8 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # SPDX-License-Identifier: AGPL-3.0-only
 # Copyright (C) 2026 Fede <fedebarriosd@gmail.com>
 
-#!/usr/bin/env bash
 set -euo pipefail
 
 usage() {
